@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>PDF Editor Suite</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <main>
+      <h1>Online PDF Editor Tools</h1>
+      <p>Convert files between PDF, DOC, Excel, and images. Redact sensitive PDF content.</p>
+
+      <section class="card">
+        <h2>File Conversion</h2>
+        <form id="convertForm">
+          <label>
+            Conversion mode
+            <select name="mode" id="modeSelect" required>
+              {% for key, cfg in conversions.items() %}
+              <option value="{{ key }}">{{ key }}</option>
+              {% endfor %}
+            </select>
+          </label>
+
+          <label>
+            Target format (PDF to image only)
+            <select name="target_format" id="targetFormat">
+              <option value="png">png</option>
+              <option value="jpg">jpg</option>
+              <option value="jpeg">jpeg</option>
+            </select>
+          </label>
+
+          <label>
+            Upload file
+            <input type="file" name="file" required />
+          </label>
+
+          <button type="submit">Convert</button>
+        </form>
+      </section>
+
+      <section class="card">
+        <h2>PDF Redaction</h2>
+        <form id="redactForm">
+          <label>
+            Upload PDF
+            <input type="file" name="file" accept="application/pdf" required />
+          </label>
+
+          <label>
+            Terms to redact (comma separated)
+            <input type="text" name="terms" placeholder="email, phone, account" required />
+          </label>
+
+          <button type="submit">Redact PDF</button>
+        </form>
+      </section>
+
+      <p id="status"></p>
+    </main>
+
+    <script src="/static/app.js"></script>
+  </body>
+</html>
